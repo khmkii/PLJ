@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import message_flash %}
+
+{% block content %}
+    <div class="entry-list">
+        {{ message_flash() }}
+        {% for entry in entries %}
+            <article>
+                <h2><a href={{ url_for('detail', entry=entry.title) }}>{{ entry.title }}</a></h2>
+                <time>{{ entry.print_date1() }}</time>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock content %}

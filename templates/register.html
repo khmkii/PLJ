@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import message_flash %}
+
+{% block header %}
+    <div class="container">
+        <div class="site-header">
+            <a class="button" href={{ url_for('login') }}>Login</a>
+        </div>
+    </div>
+{% endblock header %}
+
+{% block content %}
+    <h2>Register for a journal here!</h2><br>
+    {{ message_flash() }}
+    <form method="POST", action={{ url_for('register') }} class="form">
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <div class="notification">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {{ field(placeholder=field.label.text) }}
+        {% endfor %}
+        <input type="submit" value="Register" class="button">
+    </form>
+{% endblock content %}

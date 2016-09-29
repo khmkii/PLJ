@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="new-entry">
+        <h2>Edit Entry</h2>
+        <p>re-write the entry here</p><br>
+        <form method="POST" action="" class="form">
+            {% for field in edit %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="notification error">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% if field.id == 'date' %}
+                    <input id="date" type="date" name="date"><br>
+                {% else %}
+                    {{ field(placeholder=field.label.text) }}
+                {% endif %}
+            {% endfor %}
+            <input type="submit" value="Edit Entry" class="button">
+            <a href="{{ url_for('index') }}" class="button button-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock content %}
